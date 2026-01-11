@@ -4,109 +4,203 @@
     <meta charset="UTF-8">
     <title>Boutkhil Ahmed Amine | Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary: #1f2933;
-            --secondary: #2563eb;
-            --background: #f5f7fa;
-            --card: #ffffff;
-            --text: #374151;
+            /* Palette de couleurs "Data Science & Tech" */
+            --primary: #0f172a;       /* Dark Slate */
+            --accent: #3b82f6;        /* Royal Blue */
+            --accent-hover: #2563eb;  /* Darker Blue */
+            --background: #f8fafc;    /* Very Light Grey/Blue */
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
         }
 
         * {
             box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: 'Inter', sans-serif; /* Police moderne type "Start-up" */
         }
 
         body {
             margin: 0;
-            background: var(--background);
-            color: var(--text);
+            background-color: var(--background);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* --- Header Stylisé avec forme géométrique --- */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: radial-gradient(circle at top right, #2563eb, #0f172a);
             color: white;
-            padding: 60px 20px;
+            padding: 100px 20px 120px; /* Plus d'espace en bas pour la découpe */
             text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); /* Coupe en diagonale */
+            position: relative;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.6em;
+            font-size: clamp(2rem, 5vw, 3.5rem); /* Taille adaptative */
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         header p {
-            font-size: 1.1em;
+            font-size: 1.2rem;
+            font-weight: 300;
             opacity: 0.9;
+            margin-top: 15px;
         }
 
+        /* --- Layout --- */
         .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 40px 20px;
+            max-width: 1000px;
+            margin: -60px auto 40px; /* Remonte sur le header */
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
 
         section {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         h2 {
+            font-size: 1.8rem;
             color: var(--primary);
-            margin-bottom: 20px;
-            border-left: 5px solid var(--secondary);
-            padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        /* Petite ligne décorative après le titre */
+        h2::after {
+            content: "";
+            height: 3px;
+            width: 60px;
+            background: var(--accent);
+            border-radius: 2px;
         }
 
+        /* --- Cartes --- */
         .card {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04); /* Ombre douce */
+            margin-bottom: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 6px;
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15); /* Lueur bleue au survol */
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* --- Badges & Listes --- */
+        .badge {
+            background: #eff6ff;
+            color: var(--accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+            border: 1px solid #dbeafe;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        /* Remplacer les puces par des flèches */
+        li::before {
+            content: "\f058"; /* Code icône FontAwesome (Check circle) */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        /* --- Boutons/Liens --- */
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
         }
 
         .links a {
-            display: inline-block;
-            margin: 10px 15px 0 0;
-            padding: 10px 18px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 30px;
             text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
+            padding: 14px 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
         }
 
         .links a:hover {
-            background: #1d4ed8;
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-            opacity: 0.7;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: white;
+            margin-top: 40px;
+        }
+
+        /* --- Animations Scroll --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive spécifique */
+        @media (max-width: 600px) {
+            header { clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
+            h2::after { display: none; }
         }
     </style>
 </head>
@@ -114,123 +208,137 @@
 <body>
 
 <header>
-    <h1>BOUTKHIL AHMED AMINE</h1>
-    <p>Étudiant en Marketing Digital & Business Intelligence</p>
-    <p>📍 Salé, Maroc</p>
+    <h1>Boutkhil Ahmed Amine</h1>
+    <p><i class="fas fa-chart-pie"></i> Étudiant en Marketing Digital & Business Intelligence</p>
+    <p style="font-size: 0.9em; opacity: 0.8;"><i class="fas fa-map-marker-alt"></i> Salé, Maroc</p>
 </header>
 
 <div class="container">
 
-    <section>
-        <h2>À propos de moi</h2>
+    <section class="reveal">
+        <h2><i class="fas fa-user-circle"></i> À propos de moi</h2>
         <div class="card">
-            Étudiant en 2ᵉ année DUT Marketing Digital et Commercial, passionné par l’analyse de données,
-            la stratégie digitale et la prise de décision basée sur les données.
-            Sérieux, autonome et impliqué dans les projets académiques et associatifs.
+            <p>
+                Majorant de filière et passionné par la donnée, je navigue à l'intersection du <strong>marketing stratégique</strong> et de la <strong>Data Science</strong>. 
+                Mon objectif ? Transformer des données brutes en leviers de croissance concrets pour l'entreprise.
+                <br><br>
+                <em>Sérieux, autonome et impliqué dans la vie associative.</em>
+            </p>
         </div>
     </section>
 
-    <section>
-        <h2>Formations & Diplômes</h2>
+    <section class="reveal">
+        <h2><i class="fas fa-graduation-cap"></i> Formations</h2>
+        
         <div class="card">
-            <strong>2025 – 2026 (en cours)</strong><br>
-            DUT Marketing Digital et Commercial – 2ᵉ année<br>
-            École Supérieure de Technologie, Salé
+            <span class="badge">2025 – 2026 (En cours)</span>
+            <h3 style="margin: 5px 0;">DUT Marketing Digital & Commercial</h3>
+            <p style="margin:0; color:var(--text-muted)">École Supérieure de Technologie, Salé — 2ᵉ année</p>
         </div>
-        <div class="card">
-            <strong>2024 – 2025</strong><br>
-            DUT Marketing Digital et Commercial – 1ʳᵉ année<br>
-            Majorant de la filière
-        </div>
-        <div class="card">
-            <strong>2023 – 2024</strong><br>
-            Baccalauréat Sciences de Gestion et Comptabilité<br>
-            Mention Bien
+
+        <div class="grid">
+            <div class="card">
+                <span class="badge">2024 – 2025</span>
+                <h3 style="margin: 5px 0;">DUT 1ʳᵉ Année</h3>
+                <p style="color: var(--accent); font-weight: bold;">🏆 Majorant de la filière</p>
+            </div>
+            <div class="card">
+                <span class="badge">2023 – 2024</span>
+                <h3 style="margin: 5px 0;">Baccalauréat Gestion</h3>
+                <p>Mention Bien</p>
+            </div>
         </div>
     </section>
 
-    <section>
-        <h2>Expérience professionnelle</h2>
+    <section class="reveal">
+        <h2><i class="fas fa-briefcase"></i> Expérience Pro</h2>
         <div class="card">
-            <strong>Stage d’initiation – DR NAVY (France)</strong><br>
-            <em>2025 – 2 mois</em>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                <h3 style="margin:0;">Stage d’initiation – DR NAVY</h3>
+                <span class="badge" style="background:var(--primary); color:white;">France | 2025</span>
+            </div>
+            <p style="font-style:italic; color:var(--text-muted); margin-top:5px;">Durée : 2 mois</p>
             <ul>
-                <li>Création d’un logo et assistance administrative</li>
-                <li>Accueil et gestion des clients</li>
-                <li>Observation des procédures et rédaction de documents</li>
+                <li>Création d’identité visuelle (Logo) & assistance administrative</li>
+                <li>Gestion de la relation client (Accueil & Suivi)</li>
+                <li>Analyse des procédures internes et rédaction de rapports</li>
             </ul>
         </div>
     </section>
 
-    <section>
-        <h2>Projets & Compétences</h2>
+    <section class="reveal">
+        <h2><i class="fas fa-rocket"></i> Projets & Compétences</h2>
         <div class="grid">
             <div class="card">
-                <strong>Stratégie digitale & étude de marché</strong>
+                <h3 style="color:var(--accent);"><i class="fas fa-chart-line"></i> Data & Stratégie</h3>
                 <ul>
-                    <li>Analyse de données avec SPSS & NVivo</li>
-                    <li>Google Analytics, Power BI, Canva</li>
+                    <li>Analyse de données (SPSS & NVivo)</li>
+                    <li>Visualisation (Power BI, Google Analytics)</li>
+                    <li>Design Graphique (Canva)</li>
                 </ul>
             </div>
             <div class="card">
-                <strong>Commercialisation en ligne</strong>
+                <h3 style="color:var(--accent);"><i class="fas fa-laptop-code"></i> E-Commerce & Web</h3>
                 <ul>
-                    <li>Création de sites HTML / CSS</li>
-                    <li>Techniques de promotion et de vente</li>
-                    <li>Outils d’intelligence artificielle</li>
+                    <li>Création Web (HTML / CSS)</li>
+                    <li>Stratégies de promotion & vente</li>
+                    <li>Utilisation d'outils IA (Prompting)</li>
                 </ul>
             </div>
             <div class="card">
-                <strong>Compétences personnelles</strong>
+                <h3 style="color:var(--accent);"><i class="fas fa-users"></i> Soft Skills</h3>
                 <ul>
-                    <li>Communication & travail d’équipe</li>
-                    <li>Leadership (délégué & président de club)</li>
+                    <li>Leadership (Président de club)</li>
+                    <li>Communication efficace</li>
+                    <li>Travail d’équipe</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section>
-        <h2>Langues</h2>
-        <div class="card">
-            Français : Avancé<br>
-            Arabe : Langue maternelle<br>
-            Anglais : Courant
+    <section class="reveal">
+        <h2><i class="fas fa-language"></i> Langues</h2>
+        <div class="grid">
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-comments fa-2x" style="color:var(--accent); margin-bottom:10px;"></i>
+                <br><strong>Français</strong><br>Avancé
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-book-open fa-2x" style="color:var(--primary); margin-bottom:10px;"></i>
+                <br><strong>Arabe</strong><br>Langue maternelle
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-globe fa-2x" style="color:var(--text-muted); margin-bottom:10px;"></i>
+                <br><strong>Anglais</strong><br>Courant
+            </div>
         </div>
     </section>
 
-    <section>
-        <h2>Liens</h2>
+    <section class="reveal" style="text-align: center; margin-top: 60px;">
         <div class="links">
-            <a href="CV_BOUTKHIL_AHMED_AMINE.pdf" target="_blank">📄 Télécharger mon CV</a>
-            <a href="https://github.com/Hamada665" target="_blank">💻 GitHub</a>
-            <a href="https://www.kaggle.com/TON-USERNAME" target="_blank">📊 Kaggle</a>
+            <a href="CV_BOUTKHIL_AHMED_AMINE.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Télécharger mon CV</a>
+            <a href="#" target="_blank" style="background:#24292e;"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" target="_blank" style="background:#0077b5;"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
     </section>
 
 </div>
 
 <footer>
-    © 2026 — Portfolio académique Data Science & BI
+    <p>© 2026 — <strong>Boutkhil Ahmed Amine</strong><br>Portfolio académique Data Science & BI</p>
 </footer>
 
 <script>
-    // Animation simple au scroll
-    const cards = document.querySelectorAll('.card');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
+    // Animation améliorée au défilement (Scroll Reveal)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('active');
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 }); // Déclenche un peu plus tard pour éviter l'effet "flash"
 
-    cards.forEach(card => {
-        card.style.opacity = 0;
-        card.style.transform = 'translateY(20px)';
-        observer.observe(card);
-    });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 </script>
 
 </body>
