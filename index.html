@@ -8,16 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- NOUVELLE PALETTE DE COULEURS --- */
+        /* --- PALETTE DE COULEURS --- */
         :root {
-            /* Tes couleurs demandées */
-            --dark-blue: #2E3244;    /* Texte principal & Début Header */
-            --grey-border: #C5C6C6;  /* Bordures subtiles */
-            --white: #FFFFFF;        /* Fond des cartes */
-            --accent-orange: #F1895C;/* BOUTONS, Icones, Focus */
-            --muted-blue: #516079;   /* Fin Header & Texte secondaire */
-            
-            /* Couleur de fond de la page (un gris très pâle dérivé du blanc) */
+            --dark-blue: #2E3244;
+            --grey-border: #C5C6C6;
+            --white: #FFFFFF;
+            --accent-orange: #F1895C;
+            --muted-blue: #516079;
             --page-bg: #F5F6F8; 
         }
 
@@ -34,51 +31,110 @@
             overflow-x: hidden;
         }
 
-        /* --- Header Stylisé --- */
+        /* --- Header Stylisé (Mise à jour avec Photo) --- */
         header {
-            /* Dégradé du Bleu Nuit vers le Bleu Gris */
             background: linear-gradient(135deg, var(--dark-blue) 0%, var(--muted-blue) 100%);
             color: var(--white);
-            padding: 80px 20px 100px; /* Espace en bas pour la découpe */
-            text-align: center;
-            /* Découpe en bas (clip-path) */
+            padding: 80px 20px 120px; /* Un peu plus d'espace en bas */
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
             position: relative;
+            
+            /* Pour centrer le bloc globalement */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        header h1 {
+        /* Conteneur flex pour mettre Photo + Texte côte à côte */
+        .header-content {
+            display: flex;
+            align-items: center; /* Centrage vertical */
+            gap: 40px; /* Espace entre la photo et le texte */
+            max-width: 900px;
+            width: 100%;
+            text-align: left; /* Texte aligné à gauche par défaut sur PC */
+        }
+
+        /* --- Le Cadre de la Photo --- */
+        .profile-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            flex-shrink: 0; /* Empêche la photo de s'écraser */
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Recadre l'image sans la déformer */
+            border-radius: 50%;
+            
+            /* LE STYLE DU CADRE */
+            border: 4px solid var(--accent-orange); /* Bordure orange */
+            outline: 4px solid rgba(255, 255, 255, 0.2); /* Seconde bordure transparente externe */
+            outline-offset: 4px; /* Espace entre les deux bordures */
+            
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Ombre portée pour le relief */
+            transition: transform 0.4s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(-2deg); /* Petit effet sympa au survol */
+        }
+
+        /* Texte du header */
+        .header-text h1 {
             margin: 0;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 700;
             letter-spacing: -1px;
             color: var(--white); 
+            line-height: 1.2;
         }
 
-        header p {
-            font-size: 1.2rem;
+        .header-text p {
+            font-size: 1.1rem;
             font-weight: 300;
             opacity: 0.9;
-            margin-top: 15px;
-            color: var(--grey-border); /* Gris clair pour le sous-texte */
+            margin: 10px 0 0 0;
+            color: var(--grey-border);
         }
         
-        header i {
-            color: var(--accent-orange); /* Icônes du header en orange */
+        .header-text i {
+            color: var(--accent-orange);
+            margin-right: 8px;
         }
 
-        /* --- Layout --- */
+        /* --- Responsive : Sur mobile, on empile tout --- */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column; /* Colonne au lieu de ligne */
+                text-align: center; /* Texte centré */
+                gap: 20px;
+            }
+
+            .profile-container {
+                width: 150px; /* Un peu plus petit sur mobile */
+                height: 150px;
+                margin-bottom: 10px;
+            }
+
+            header {
+                 padding-bottom: 100px;
+                 clip-path: polygon(0 0, 100% 0, 100% 92%, 0% 100%);
+            }
+        }
+
+        /* --- Reste du CSS (Layout, Cards, etc.) --- */
         .container {
             max-width: 1000px;
-            /* CORRECTION : J'ai enlevé le -60px et mis 0 ou un margin positif */
             margin: 0 auto 40px; 
             padding: 20px 20px;
             position: relative;
             z-index: 10;
         }
 
-        section {
-            margin-bottom: 60px;
-        }
+        section { margin-bottom: 60px; }
 
         h2 {
             font-size: 1.8rem;
@@ -92,16 +148,12 @@
             width: fit-content;
         }
         
-        h2 i {
-            color: var(--accent-orange);
-        }
+        h2 i { color: var(--accent-orange); }
 
-        /* --- Cartes --- */
         .card {
             background: var(--white);
             padding: 25px;
             border-radius: 12px;
-            /* Bordure fine grise */
             border: 1px solid var(--grey-border); 
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
             margin-bottom: 20px;
@@ -110,7 +162,6 @@
 
         .card:hover {
             transform: translateY(-5px);
-            /* Au survol, la bordure devient orange */
             border-color: var(--accent-orange);
             box-shadow: 0 10px 20px rgba(46, 50, 68, 0.1);
         }
@@ -121,9 +172,8 @@
             gap: 25px;
         }
 
-        /* --- Badges --- */
         .badge {
-            background: #EDEEF0; /* Un gris très léger */
+            background: #EDEEF0;
             color: var(--muted-blue);
             padding: 5px 12px;
             border-radius: 6px;
@@ -133,18 +183,13 @@
             margin-bottom: 10px;
         }
         
-        /* Badge Majorant */
         .badge-highlight {
-            background: rgba(241, 137, 92, 0.15); /* Orange très pâle */
-            color: var(--accent-orange); /* Texte Orange */
+            background: rgba(241, 137, 92, 0.15);
+            color: var(--accent-orange);
             border: 1px solid var(--accent-orange);
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 15px 0 0;
-        }
+        ul { list-style: none; padding: 0; margin: 15px 0 0; }
 
         li {
             margin-bottom: 10px;
@@ -154,7 +199,6 @@
             color: var(--muted-blue);
         }
 
-        /* Les coches des listes en Orange */
         li::before {
             content: "\f058"; 
             font-family: "Font Awesome 6 Free";
@@ -163,7 +207,6 @@
             margin-top: 3px;
         }
 
-        /* --- Boutons/Liens --- */
         .links {
             display: flex;
             flex-wrap: wrap;
@@ -174,10 +217,9 @@
         .links a {
             text-decoration: none;
             padding: 14px 28px;
-            /* Bouton Orange */
             background: var(--accent-orange);
             color: var(--white);
-            border-radius: 8px; /* Moins rond, plus moderne */
+            border-radius: 8px;
             font-weight: 600;
             transition: 0.3s;
             display: flex;
@@ -203,7 +245,6 @@
             border-top: 1px solid var(--grey-border);
         }
 
-        /* --- Animations Scroll --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -214,21 +255,24 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        @media (max-width: 600px) {
-            header { clip-path: polygon(0 0, 100% 0, 100% 92%, 0% 100%); }
-        }
     </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Boutkhil Ahmed Amine</h1>
-    <p><i class="fas fa-chart-pie"></i> Étudiant en Marketing Digital et Commercial </p>
-    <p style="font-size: 0.9em; opacity: 0.8;"><i class="fas fa-map-marker-alt"></i> Salé, Maroc</p>
+    <div class="header-content">
+        <div class="profile-container">
+            <img src="https://via.placeholder.com/200" alt="Boutkhil Ahmed Amine" class="profile-img">
+        </div>
+        
+        <div class="header-text">
+            <h1>Boutkhil Ahmed Amine</h1>
+            <p><i class="fas fa-chart-pie"></i> Étudiant en Marketing Digital et Commercial</p>
+            <p style="font-size: 0.95em; margin-top: 5px;"><i class="fas fa-map-marker-alt"></i> Salé, Maroc</p>
+        </div>
+    </div>
 </header>
-
 <div class="container">
 
     <section class="reveal">
@@ -333,8 +377,8 @@
     <section class="reveal" style="text-align: center; margin-top: 60px;">
         <div class="links">
             <a href="CV_BOUTKHIL_AHMED_AMINE.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Télécharger mon CV</a>
-            <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="#" target="_blank" style="background: var(--dark-blue);"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" target="_blank" style="background: #0077b5;"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
     </section>
 
