@@ -10,14 +10,15 @@
     <style>
         /* --- NOUVELLE PALETTE DE COULEURS --- */
         :root {
-            --deep-teal: #18534F;    /* Foncé - Pour le texte principal et le début du dégradé */
-            --teal: #226D68;         /* Moyen - Pour les icônes et la fin du dégradé */
-            --mint-bg: #ECF8F6;      /* Très clair - Fond de la page */
-            --highlight-yellow: #FEEAA1; /* Jaune pâle - Pour mettre en avant (badges) */
-            --bronze-accent: #D6955B; /* Orange/Bronze - Pour les BOUTONS et l'intéractivité (VIF) */
+            /* Tes couleurs demandées */
+            --dark-blue: #2E3244;    /* Texte principal & Début Header */
+            --grey-border: #C5C6C6;  /* Bordures subtiles */
+            --white: #FFFFFF;        /* Fond des cartes */
+            --accent-orange: #F1895C;/* BOUTONS, Icones, Focus */
+            --muted-blue: #516079;   /* Fin Header & Texte secondaire */
             
-            --card-bg: #ffffff;
-            --text-muted: #547c79;   /* Un mélange du teal et du gris pour le texte secondaire */
+            /* Couleur de fond de la page (un gris très pâle dérivé du blanc) */
+            --page-bg: #F5F6F8; 
         }
 
         * {
@@ -27,19 +28,20 @@
 
         body {
             margin: 0;
-            background-color: var(--mint-bg); /* Utilisation du fond menthe */
-            color: var(--deep-teal);
+            background-color: var(--page-bg);
+            color: var(--dark-blue);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         /* --- Header Stylisé --- */
         header {
-            /* Nouveau dégradé avec les teals */
-            background: linear-gradient(135deg, var(--deep-teal), var(--teal));
-            color: var(--mint-bg); /* Texte en blanc cassé/menthe pour le contraste */
-            padding: 100px 20px 120px;
+            /* Dégradé du Bleu Nuit vers le Bleu Gris */
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--muted-blue) 100%);
+            color: var(--white);
+            padding: 80px 20px 100px; /* Espace en bas pour la découpe */
             text-align: center;
+            /* Découpe en bas (clip-path) */
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
             position: relative;
         }
@@ -49,21 +51,27 @@
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
             letter-spacing: -1px;
-            color: var(--highlight-yellow); /* Le titre principal en jaune pâle pour ressortir */
+            color: var(--white); 
         }
 
         header p {
             font-size: 1.2rem;
             font-weight: 300;
-            opacity: 0.95;
+            opacity: 0.9;
             margin-top: 15px;
+            color: var(--grey-border); /* Gris clair pour le sous-texte */
+        }
+        
+        header i {
+            color: var(--accent-orange); /* Icônes du header en orange */
         }
 
         /* --- Layout --- */
         .container {
             max-width: 1000px;
-            margin: -60px auto 40px;
-            padding: 0 20px;
+            /* CORRECTION : J'ai enlevé le -60px et mis 0 ou un margin positif */
+            margin: 0 auto 40px; 
+            padding: 20px 20px;
             position: relative;
             z-index: 10;
         }
@@ -74,44 +82,37 @@
 
         h2 {
             font-size: 1.8rem;
-            color: var(--deep-teal);
+            color: var(--dark-blue);
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 25px;
+            border-bottom: 2px solid var(--grey-border);
+            padding-bottom: 10px;
+            width: fit-content;
         }
         
         h2 i {
-            color: var(--bronze-accent); /* Les icônes des titres en orange vif */
-        }
-
-        /* Ligne décorative sous les titres */
-        h2::after {
-            content: "";
-            height: 3px;
-            width: 60px;
-            background: var(--teal);
-            border-radius: 2px;
-            opacity: 0.5;
+            color: var(--accent-orange);
         }
 
         /* --- Cartes --- */
         .card {
-            background: var(--card-bg);
+            background: var(--white);
             padding: 25px;
-            border-radius: 16px;
-            /* Bordure subtile avec le teal */
-            border: 1px solid rgba(34, 109, 104, 0.1); 
-            box-shadow: 0 10px 30px rgba(24, 83, 79, 0.05);
+            border-radius: 12px;
+            /* Bordure fine grise */
+            border: 1px solid var(--grey-border); 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
             margin-bottom: 20px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.01);
-            /* Au survol, la bordure devient orange vif */
-            border-color: var(--bronze-accent);
-            box-shadow: 0 15px 35px rgba(214, 149, 91, 0.15);
+            transform: translateY(-5px);
+            /* Au survol, la bordure devient orange */
+            border-color: var(--accent-orange);
+            box-shadow: 0 10px 20px rgba(46, 50, 68, 0.1);
         }
 
         .grid {
@@ -122,23 +123,21 @@
 
         /* --- Badges --- */
         .badge {
-            background: var(--mint-bg);
-            color: var(--teal);
+            background: #EDEEF0; /* Un gris très léger */
+            color: var(--muted-blue);
             padding: 5px 12px;
-            border-radius: 20px;
+            border-radius: 6px;
             font-size: 0.85rem;
             font-weight: 600;
             display: inline-block;
             margin-bottom: 10px;
-            border: 1px solid rgba(34, 109, 104, 0.2);
         }
         
-        /* Nouveau style pour le badge "Majorant" */
+        /* Badge Majorant */
         .badge-highlight {
-            background: var(--highlight-yellow);
-            color: var(--deep-teal);
-            border: none;
-            box-shadow: 0 2px 10px rgba(254, 234, 161, 0.5);
+            background: rgba(241, 137, 92, 0.15); /* Orange très pâle */
+            color: var(--accent-orange); /* Texte Orange */
+            border: 1px solid var(--accent-orange);
         }
 
         ul {
@@ -152,18 +151,19 @@
             display: flex;
             align-items: flex-start;
             gap: 10px;
+            color: var(--muted-blue);
         }
 
-        /* Les coches des listes en teal */
+        /* Les coches des listes en Orange */
         li::before {
             content: "\f058"; 
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
-            color: var(--teal);
+            color: var(--accent-orange);
             margin-top: 3px;
         }
 
-        /* --- Boutons/Liens (C'est ici que le vif arrive !) --- */
+        /* --- Boutons/Liens --- */
         .links {
             display: flex;
             flex-wrap: wrap;
@@ -174,39 +174,33 @@
         .links a {
             text-decoration: none;
             padding: 14px 28px;
-            /* Le bouton principal est en orange/bronze */
-            background: var(--bronze-accent);
-            color: white;
-            border-radius: 50px;
+            /* Bouton Orange */
+            background: var(--accent-orange);
+            color: var(--white);
+            border-radius: 8px; /* Moins rond, plus moderne */
             font-weight: 600;
             transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 4px 15px rgba(214, 149, 91, 0.3);
+            box-shadow: 0 4px 10px rgba(241, 137, 92, 0.3);
         }
 
         .links a:hover {
-            /* Au survol, il devient teal foncé et le texte jaune */
-            background: var(--deep-teal);
-            color: var(--highlight-yellow);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(24, 83, 79, 0.3);
+            background: var(--dark-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(46, 50, 68, 0.3);
         }
         
-        /* Style spécifique pour LinkedIn (bleu) et Github (noir) si tu veux garder leurs couleurs d'origine, sinon enlève ces lignes */
-        .links a.linkedin-btn { background: #0077b5; }
-        .links a.github-btn { background: #24292e; }
-
-
         footer {
             text-align: center;
             padding: 60px 20px;
-            color: var(--text-muted);
+            color: var(--muted-blue);
             font-size: 0.9rem;
-            background: var(--card-bg);
+            background: var(--white);
             margin-top: 40px;
-            border-top: 3px solid var(--teal);
+            border-top: 1px solid var(--grey-border);
         }
 
         /* --- Animations Scroll --- */
@@ -222,8 +216,7 @@
         }
 
         @media (max-width: 600px) {
-            header { clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
-            h2::after { display: none; }
+            header { clip-path: polygon(0 0, 100% 0, 100% 92%, 0% 100%); }
         }
     </style>
 </head>
@@ -241,11 +234,11 @@
     <section class="reveal">
         <h2><i class="fas fa-user-circle"></i> À propos de moi</h2>
         <div class="card">
-            <p>
-                Majorant de filière et passionné par la donnée, je navigue à l'intersection du <strong>marketing stratégique</strong> et de la <strong>Data Science</strong>. 
+            <p style="color: var(--muted-blue);">
+                Majorant de filière et passionné par la donnée, je navigue à l'intersection du <strong style="color:var(--dark-blue)">marketing stratégique</strong> et de la <strong style="color:var(--dark-blue)">Data Science</strong>. 
                 Mon objectif ? Transformer des données brutes en leviers de croissance concrets pour l'entreprise.
                 <br><br>
-                <em style="color: var(--text-muted);">Sérieux, autonome et impliqué dans la vie associative.</em>
+                <em>Sérieux, autonome et impliqué dans la vie associative.</em>
             </p>
         </div>
     </section>
@@ -256,7 +249,7 @@
         <div class="card">
             <span class="badge">2025 – 2026 (En cours)</span>
             <h3 style="margin: 5px 0;">DUT Marketing Digital & Commercial</h3>
-            <p style="margin:0; color:var(--text-muted)">École Supérieure de Technologie, Salé — 2ᵉ année</p>
+            <p style="margin:0; color:var(--muted-blue)">École Supérieure de Technologie, Salé — 2ᵉ année</p>
         </div>
 
         <div class="grid">
@@ -268,7 +261,7 @@
             <div class="card">
                 <span class="badge">2023 – 2024</span>
                 <h3 style="margin: 5px 0;">Baccalauréat Gestion</h3>
-                <p>Mention Bien</p>
+                <p style="color:var(--muted-blue)">Mention Bien</p>
             </div>
         </div>
     </section>
@@ -278,9 +271,9 @@
         <div class="card">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
                 <h3 style="margin:0;">Stage d’initiation – DR NAVY</h3>
-                <span class="badge" style="background:var(--bronze-accent); color:white; border:none;">France | 2025</span>
+                <span class="badge" style="background:var(--accent-orange); color:white;">France | 2025</span>
             </div>
-            <p style="font-style:italic; color:var(--text-muted); margin-top:5px;">Durée : 2 mois</p>
+            <p style="font-style:italic; color:var(--muted-blue); margin-top:5px;">Durée : 2 mois</p>
             <ul>
                 <li>Création d’identité visuelle (Logo) & assistance administrative</li>
                 <li>Gestion de la relation client (Accueil & Suivi)</li>
@@ -293,7 +286,7 @@
         <h2><i class="fas fa-rocket"></i> Projets & Compétences</h2>
         <div class="grid">
             <div class="card">
-                <h3 style="color:var(--teal);"><i class="fas fa-chart-line" style="color:var(--bronze-accent);"></i> Data & Stratégie</h3>
+                <h3 style="color:var(--dark-blue);"><i class="fas fa-chart-line" style="color:var(--accent-orange);"></i> Data & Stratégie</h3>
                 <ul>
                     <li>Analyse de données (SPSS & NVivo)</li>
                     <li>Visualisation (Power BI, Google Analytics)</li>
@@ -301,7 +294,7 @@
                 </ul>
             </div>
             <div class="card">
-                <h3 style="color:var(--teal);"><i class="fas fa-laptop-code" style="color:var(--bronze-accent);"></i> E-Commerce & Web</h3>
+                <h3 style="color:var(--dark-blue);"><i class="fas fa-laptop-code" style="color:var(--accent-orange);"></i> E-Commerce & Web</h3>
                 <ul>
                     <li>Création Web (HTML / CSS)</li>
                     <li>Stratégies de promotion & vente</li>
@@ -309,7 +302,7 @@
                 </ul>
             </div>
             <div class="card">
-                <h3 style="color:var(--teal);"><i class="fas fa-users" style="color:var(--bronze-accent);"></i> Soft Skills</h3>
+                <h3 style="color:var(--dark-blue);"><i class="fas fa-users" style="color:var(--accent-orange);"></i> Soft Skills</h3>
                 <ul>
                     <li>Leadership (Président de club)</li>
                     <li>Communication efficace</li>
@@ -323,16 +316,16 @@
         <h2><i class="fas fa-language"></i> Langues</h2>
         <div class="grid">
             <div class="card" style="text-align: center;">
-                <i class="fas fa-comments fa-2x" style="color:var(--bronze-accent); margin-bottom:10px;"></i>
-                <br><strong>Français</strong><br><span style="color:var(--text-muted)">Avancé</span>
+                <i class="fas fa-comments fa-2x" style="color:var(--muted-blue); margin-bottom:10px;"></i>
+                <br><strong>Français</strong><br><span style="color:var(--muted-blue)">Avancé</span>
             </div>
             <div class="card" style="text-align: center;">
-                <i class="fas fa-book-open fa-2x" style="color:var(--deep-teal); margin-bottom:10px;"></i>
-                <br><strong>Arabe</strong><br><span style="color:var(--text-muted)">Langue maternelle</span>
+                <i class="fas fa-book-open fa-2x" style="color:var(--accent-orange); margin-bottom:10px;"></i>
+                <br><strong>Arabe</strong><br><span style="color:var(--muted-blue)">Langue maternelle</span>
             </div>
             <div class="card" style="text-align: center;">
-                <i class="fas fa-globe fa-2x" style="color:var(--teal); margin-bottom:10px;"></i>
-                <br><strong>Anglais</strong><br><span style="color:var(--text-muted)">Courant</span>
+                <i class="fas fa-globe fa-2x" style="color:var(--dark-blue); margin-bottom:10px;"></i>
+                <br><strong>Anglais</strong><br><span style="color:var(--muted-blue)">Courant</span>
             </div>
         </div>
     </section>
@@ -340,8 +333,8 @@
     <section class="reveal" style="text-align: center; margin-top: 60px;">
         <div class="links">
             <a href="CV_BOUTKHIL_AHMED_AMINE.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Télécharger mon CV</a>
-            <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="#" target="_blank" style="background: var(--dark-blue);"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" target="_blank" style="background: #0077b5;"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
     </section>
 
